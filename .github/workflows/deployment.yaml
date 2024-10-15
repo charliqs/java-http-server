@@ -1,0 +1,32 @@
+name: Deployment
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The tag of the HTTP java server docker image to be deployed
+        required: true
+        type: string
+        default: latest
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Getting the Secret Key...
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: echo $PRIVATE_KEY > kp.pem
+      - name: Connecting to the VM
+        run: ssh -i "./kp.pem" ec2-user@_____ip de tu VM____
+      - name: Stopping the old docker container
+        run: docker stop ____nombre contenedor____
+      - name: Running the new docker container
+        run: docker run charlys/java-http:${{ inputs.tag }}  ____ponerle nombre contenedor____
+      
+      - name: Authj
+        uses: asdfasdf <---- docker , composite, node
+
+
+      
