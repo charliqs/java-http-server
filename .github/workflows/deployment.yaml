@@ -6,7 +6,7 @@ on:
         description: The tag of the HTTP java server docker image to be deployed
         required: true
         type: string
-        default: latest
+        default: '1.0'
 
 jobs:
   deployment:
@@ -23,7 +23,7 @@ jobs:
       - name: Stopping the old docker container
         run: docker stop ____nombre contenedor____
       - name: Running the new docker container
-        run: docker run charlys/java-http:${{ inputs.tag }}  ____ponerle nombre contenedor____
+        run: docker run docker run -d -p 8000:8000 charliqs/java-http-server:1.0
       
       - name: Authj
         uses: asdfasdf <---- docker , composite, node
