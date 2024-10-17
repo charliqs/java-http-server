@@ -1,8 +1,15 @@
 terraform {
   backend "s3" {
-    bucket         = "java-http-state"  # Ensure this matches the bucket name you created
-    key            = "terraform.tfstate"               # Location of the state file in the bucket
-    region         = "us-east-1"                       # S3 bucket region
+    bucket         = "java-http-state"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+  }
+
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 5.0"
+    }
   }
 }
 
@@ -50,7 +57,7 @@ resource "aws_instance" "java_http_server" {
               #!/bin/bash
               yum update -y
               yum install -y docker
-              sudo apt-get install -y openjdk-17-jdk
+              sudo usermod -aG docker ec2-user
               service docker start
               EOF
 
