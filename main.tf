@@ -52,8 +52,6 @@ resource "aws_instance" "java_http_server" {
               yum install -y docker
               sudo apt-get install -y openjdk-17-jdk
               service docker start
-              usermod -a -G docker ec2-user
-              docker run -d -p 8000:8000 charliqs/java-http-server
               EOF
 
   key_name = aws_key_pair.my_key_pair.key_name
